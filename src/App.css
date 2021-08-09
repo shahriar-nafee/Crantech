@@ -5,6 +5,15 @@
 }
 
 p {
-  font-family: sans-serif;
   font-size: large;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(./fonts/Gilroy-Light.otf);
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(./fonts/Poppins-Regular.ttf);
 }
