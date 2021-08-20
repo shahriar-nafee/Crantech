@@ -4,14 +4,12 @@ import axios from "axios";
 import { useLocation } from "react-router-dom";
 import { Card } from "react-bootstrap";
 import { useTheme } from "../components/ThemeContext";
-import { useLanguage } from "../components/ThemeContext";
 
 function Detail() {
   const location = useLocation();
   const url = location.state;
   const [data, setData] = useState();
-  const theme = useTheme();
-  const Language = useLanguage();
+  const { themes, language } = useTheme();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,15 +26,15 @@ function Detail() {
   }, []);
 
   const styles = {
-    color: theme && theme["text-color"],
-    backgroundColor: theme && theme["background-color"],
-    fontFamily: theme && theme["text-font"],
+    color: themes && themes["text-color"],
+    backgroundColor: themes && themes["background-color"],
+    fontFamily: themes && themes["text-font"],
   };
 
   const cardStyles = {
-    color: theme && theme["card-text-color"],
-    backgroundColor: theme && theme["card-background-color"],
-    fontFamily: theme && theme["card-text-font"],
+    color: themes && themes["card-text-color"],
+    backgroundColor: themes && themes["card-background-color"],
+    fontFamily: themes && themes["card-text-font"],
   };
 
   return (
@@ -53,10 +51,10 @@ function Detail() {
                   <Card.Img variant="top" src={item.photo} />
                   <Card.Body>
                     <Card.Title>
-                      {Language === "en" ? item.title_en : item.title_bn}
+                      {language === "en" ? item.title_en : item.title_bn}
                     </Card.Title>
                     <Card.Text>
-                      {Language === "en" ? item.value_en : item.value_bn}
+                      {language === "en" ? item.value_en : item.value_bn}
                     </Card.Text>
                   </Card.Body>
                 </Card>

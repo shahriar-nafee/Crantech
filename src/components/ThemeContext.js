@@ -3,24 +3,9 @@ import axios from "axios";
 import { useState, useEffect, useContext } from "react";
 
 const ThemeContext = React.createContext();
-const LanguageDataContext = React.createContext();
-const ToggleContext = React.createContext();
-const LanguageContext = React.createContext();
 
 export function useTheme() {
   return useContext(ThemeContext);
-}
-
-export function useLanguageData() {
-  return useContext(LanguageDataContext);
-}
-
-export function useToggle() {
-  return useContext(ToggleContext);
-}
-
-export function useLanguage() {
-  return useContext(LanguageContext);
 }
 
 export function ThemeProvider({ children }) {
@@ -47,15 +32,14 @@ export function ThemeProvider({ children }) {
     fetchData();
   }, []);
 
+  const value = {
+    themes,
+    languageData,
+    language,
+    handleChange,
+  };
+
   return (
-    <ThemeContext.Provider value={themes}>
-      <LanguageDataContext.Provider value={languageData}>
-        <ToggleContext.Provider value={handleChange}>
-          <LanguageContext.Provider value={language}>
-            {children}
-          </LanguageContext.Provider>
-        </ToggleContext.Provider>
-      </LanguageDataContext.Provider>
-    </ThemeContext.Provider>
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
 }

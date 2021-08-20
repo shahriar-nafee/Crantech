@@ -1,12 +1,10 @@
 import React from "react";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useLanguageData } from "./ThemeContext";
-import { useToggle } from "./ThemeContext";
+import { useTheme } from "./ThemeContext";
 
 function Topbar() {
-  const language = useLanguageData();
-  const ToggleLanguage = useToggle();
+  const { languageData, handleChange } = useTheme();
 
   return (
     <div>
@@ -41,9 +39,9 @@ function Topbar() {
               </Nav.Link>
             </Nav>
             <NavDropdown title="Language">
-              {language &&
-                language.map((item) => (
-                  <NavDropdown.Item onClick={ToggleLanguage}>
+              {languageData &&
+                languageData.map((item) => (
+                  <NavDropdown.Item onClick={handleChange}>
                     {item}
                   </NavDropdown.Item>
                 ))}
